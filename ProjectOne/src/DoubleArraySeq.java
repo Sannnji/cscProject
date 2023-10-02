@@ -62,9 +62,11 @@ public class DoubleArraySeq implements Cloneable
      *   Indicates insufficient memory for:
      *   new double[10].
      **/
-    public DoubleArraySeq( )
-    {
+    public DoubleArraySeq( ) {
         // Implemented by student.
+        data = new double[10];
+        manyItems = 0;
+        currentIndex = 0;
     }
 
 
@@ -84,9 +86,11 @@ public class DoubleArraySeq implements Cloneable
      *   Indicates insufficient memory for:
      *   new double[initialCapacity].
      **/
-    public DoubleArraySeq(int initialCapacity)
-    {
+    public DoubleArraySeq(int initialCapacity) {
         // Implemented by student.
+        data = new double[initialCapacity];
+        manyItems = 0;
+        currentIndex = 0;
     }
 
 
@@ -109,9 +113,13 @@ public class DoubleArraySeq implements Cloneable
      *   Integer.MAX_VALUE will cause the sequence to fail with an
      *   arithmetic overflow.
      **/
-    public void addAfter(double element)
-    {
+    public void addAfter(double element) {
         // Implemented by student.
+        if (manyItems == data.length) {
+            ensureCapacity((data.length * 2) + 1);
+        }
+        data[manyItems] = element;
+        manyItems++;
     }
 
 
@@ -134,9 +142,9 @@ public class DoubleArraySeq implements Cloneable
      *   Integer.MAX_VALUE will cause the sequence to fail with an
      *   arithmetic overflow.
      **/
-    public void addBefore(double element)
-    {
+    public void addBefore(double element) {
         // Implemented by student.
+        if (currentIndex == 0)
     }
 
 
@@ -230,19 +238,19 @@ public class DoubleArraySeq implements Cloneable
      * @return
      *   a new sequence that has the elements of s1 followed by the
      *   elements of s2 (with no current element)
-     * @exception NullPointerException.
+//     * @exception NullPointerException.
      *   Indicates that one of the arguments is null.
-     * @exception OutOfMemoryError
+//     * @exception OutOfMemoryError
      *   Indicates insufficient memory for the new sequence.
      * @note
      *   An attempt to create a sequence with a capacity beyond
      *   Integer.MAX_VALUE will cause an arithmetic overflow
      *   that will cause the sequence to fail.
      **/
-    public static DoubleArraySeq concatenation(DoubleArraySeq s1, DoubleArraySeq s2)
-    {
-        // Implemented by student.
-    }
+//    public static DoubleArraySeq concatenation(DoubleArraySeq s1, DoubleArraySeq s2)
+//    {
+//        // Implemented by student.
+//    }
 
 
     /**
@@ -259,6 +267,13 @@ public class DoubleArraySeq implements Cloneable
     public void ensureCapacity(int minimumCapacity)
     {
         // Implemented by student.
+        double[] biggerSequence;
+        if (data.length < minimumCapacity)
+        {
+            biggerSequence = new double[minimumCapacity];
+            System.arraycopy(data, 0, biggerSequence, 0, manyItems);
+            data = biggerSequence;
+        }
     }
 
 
@@ -270,10 +285,10 @@ public class DoubleArraySeq implements Cloneable
      * @return
      *   the current capacity of this sequence
      **/
-    public int getCapacity( )
-    {
-        // Implemented by student.
-    }
+//    public int getCapacity( )
+//    {
+//        // Implemented by student.
+//    }
 
 
     /**
@@ -287,10 +302,10 @@ public class DoubleArraySeq implements Cloneable
      *   Indicates that there is no current element, so
      *   getCurrent may not be called.
      **/
-    public double getCurrent( )
-    {
-        // Implemented by student.
-    }
+//    public double getCurrent( )
+//    {
+//        // Implemented by student.
+//    }
 
 
     /**
@@ -301,10 +316,10 @@ public class DoubleArraySeq implements Cloneable
      * @return
      *   true (there is a current element) or false (there is no current element at the moment)
      **/
-    public boolean isCurrent( )
-    {
-        // Implemented by student.
-    }
+//    public boolean isCurrent( )
+//    {
+//        // Implemented by student.
+//    }
 
     /**
      * Remove the current element from this sequence.
@@ -320,10 +335,10 @@ public class DoubleArraySeq implements Cloneable
      *   Indicates that there is no current element, so
      *   removeCurrent may not be called.
      **/
-    public void removeCurrent( )
-    {
-        // Implemented by student.
-    }
+//    public void removeCurrent( )
+//    {
+//        // Implemented by student.
+//    }
 
 
     /**
@@ -332,10 +347,10 @@ public class DoubleArraySeq implements Cloneable
      * @return
      *   the number of elements in this sequence
      **/
-    public int size( )
-    {
-        // Implemented by student.
-    }
+//    public int size( )
+//    {
+//        // Implemented by student.
+//    }
 
 
     /**
@@ -346,10 +361,10 @@ public class DoubleArraySeq implements Cloneable
      *   if this sequence has no elements at all, then there is no current
      *   element).
      **/
-    public void start( )
-    {
-        // Implemented by student.
-    }
+//    public void start( )
+//    {
+//        // Implemented by student.
+//    }
 
 
     /**
@@ -373,6 +388,13 @@ public class DoubleArraySeq implements Cloneable
         }
     }
 
+    // Print Sequence
+    public void print() {
+        System.out.println("Sequence: ");
+        for (double item: data) {
+            System.out.print(item + " ");
+        }
+    }
 }
 
 
