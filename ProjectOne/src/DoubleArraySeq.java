@@ -1,3 +1,4 @@
+// Contributors: James Ji, Samuel Acquaviva
 // File: DoubleArraySeq.java
 
 // This is an assignment for students to complete after reading Chapter 3 of
@@ -112,10 +113,12 @@ public class DoubleArraySeq implements Cloneable {
         if (currentIndex < manyItems - 1) {
             System.arraycopy(data, currentIndex + 1, data, currentIndex + 2, manyItems - currentIndex);
         }
+        // add to first index if there are no elements otherwise add to the next index from the current
         int targetIndex = size() == 0 ? 0 : currentIndex + 1;
         data[targetIndex] = element;
 
         manyItems++;
+        // don't increment after adding first element because we are adding to the current index
         if (size() != 1) {
             currentIndex++;
         }
@@ -177,6 +180,7 @@ public class DoubleArraySeq implements Cloneable {
             ensureCapacity(manyItems + addend.manyItems);
         }
         System.arraycopy(addend.data, 0, data, manyItems, addend.manyItems);
+        manyItems += addend.manyItems;
     }
 
 
@@ -194,7 +198,15 @@ public class DoubleArraySeq implements Cloneable {
      * original current element.
      **/
     public void advance() {
-        currentIndex++;
+        try {
+            if (currentIndex == manyItems) {
+                throw new IllegalStateException("There is currently no element, no point in advancing any further");
+            }
+            currentIndex++;
+        } catch (Exception err) {
+            System.out.println(err.getMessage());
+        }
+
     }
 
 
@@ -226,28 +238,26 @@ public class DoubleArraySeq implements Cloneable {
     /**
      * Create a new sequence that contains all the elements from one sequence
      * followed by another.
-     * @param s1
-     *   the first of two sequences
-     * @param s2
-     *   the second of two sequences
-     * @precondition
-     *   Neither s1 nor s2 is null.
-     * @return
-     *   a new sequence that has the elements of s1 followed by the
-     *   elements of s2 (with no current element)
-    //     * @exception NullPointerException.
-     *   Indicates that one of the arguments is null.
-    //     * @exception OutOfMemoryError
-     *   Indicates insufficient memory for the new sequence.
-     * @note
-     *   An attempt to create a sequence with a capacity beyond
-     *   Integer.MAX_VALUE will cause an arithmetic overflow
-     *   that will cause the sequence to fail.
+     *
+     * @param s1 the first of two sequences
+     * @param s2 the second of two sequences
+     * @return a new sequence that has the elements of s1 followed by the
+     * elements of s2 (with no current element)
+     * //     * @exception NullPointerException.
+     * Indicates that one of the arguments is null.
+     * //     * @exception OutOfMemoryError
+     * Indicates insufficient memory for the new sequence.
+     * @precondition Neither s1 nor s2 is null.
+     * @note An attempt to create a sequence with a capacity beyond
+     * Integer.MAX_VALUE will cause an arithmetic overflow
+     * that will cause the sequence to fail.
      **/
-//    public static DoubleArraySeq concatenation(DoubleArraySeq s1, DoubleArraySeq s2)
-//    {
-//        // Implemented by student.
-//    }
+    public static DoubleArraySeq concatenation(DoubleArraySeq s1, DoubleArraySeq s2) {
+        DoubleArraySeq newSeq = new DoubleArraySeq(0);
+        newSeq.addAll(s1);
+        newSeq.addAll(s2);
+        return newSeq;
+    }
 
 
     /**
@@ -292,7 +302,16 @@ public class DoubleArraySeq implements Cloneable {
      * @precondition isCurrent() returns true.
      **/
     public double getCurrent() {
-        return data[currentIndex];
+        double answer = 0;
+        try {
+            if (currentIndex == manyItems) {
+                throw new IllegalStateException("There is no current element");
+            }
+            answer = data[currentIndex];
+        } catch (Exception err) {
+            System.out.println(err.getMessage());
+        }
+        return answer;
     }
 
 
@@ -308,7 +327,7 @@ public class DoubleArraySeq implements Cloneable {
         try {
             getCurrent();
             return true;
-        } catch (ArrayIndexOutOfBoundsException err) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
     }
@@ -326,12 +345,22 @@ public class DoubleArraySeq implements Cloneable {
      * element.
      **/
     public void removeCurrent() {
-        if (data[currentIndex + 1] != 0) {
-            data[currentIndex] = data[currentIndex + 1];
-            data[currentIndex + 1] = 0;
-        } else {
-            data[currentIndex] = 0;
+        try {
+            if (!isCurrent()) {
+                throw new IllegalStateException("There no current element, nothing to remove");
+            }
+
+            if (data.length != 0) {
+                data[currentIndex] = 0;
+                currentIndex = currentIndex + 1;
+            } else {
+                data[currentIndex] = 0;
+            }
+            manyItems--;
+        } catch (Exception e) {
+            e.getMessage();
         }
+
     }
 
 
@@ -355,9 +384,7 @@ public class DoubleArraySeq implements Cloneable {
      * element).
      **/
     public void start() {
-        if (isCurrent()) {
-            data[currentIndex] = data[0];
-        }
+        currentIndex = 0;
     }
 
     /**
@@ -365,22 +392,118 @@ public class DoubleArraySeq implements Cloneable {
      * the current element to index 0 of the array
      *
      * @param element The element to be added to the front of the array.
-     * @postcondition
+     * @postcondition There will be a new element in the front of the sequence and will also now
+     * be the current element
      **/
     public void addFront(double element) {
-        //Create new temp array, 1 larger than the original ( I NEED TO CHECK THE SIZE BEFORE I DO THIS)
+        // Create new temp array, 1 larger than the original ( I NEED TO CHECK THE SIZE BEFORE I DO THIS)
         double[] newData = new double[this.manyItems + 1];
 
-        //Set index 0 of the temp array to the value of the passed in element, then copy the original array to the temp array
+        // Set index 0 of the temp array to the value of the passed in element, then copy the original array to the temp array
         newData[0] = element;
         System.arraycopy(data, 0, newData, 1, this.manyItems);
 
         //Set the original array equal to the value of the updated temp array
         data = newData;
+        manyItems++;
 
-        //Set the current index to zero (Maybe I should just do start()?)
-        currentIndex = 0;
+        start();
     }
+
+    public void removeFront() {
+        if (manyItems == 0) {
+            throw new IllegalStateException("Nothing to remove, sequence is empty...");
+        } else if (manyItems == 1) {
+            manyItems--;
+            data[0] = manyItems;
+        } else {
+            data[0] = data[manyItems - 1];
+            manyItems--;
+        }
+    }
+
+    public void setCurrent(int n) {
+        if (data.length == 0) {
+            throw new IllegalArgumentException("There is nothing to print. The sequence is empty...");
+        } else if (n - 1 > manyItems) {
+            throw new IllegalStateException("Cannot setCurrent() to a invalid position in sequence...");
+        } else {
+            currentIndex = n - 1;
+        }
+    }
+
+    public double getElement(int n) {
+        double answer = 0;
+        try {
+            if (data.length == 0) {
+                throw new IllegalArgumentException("There is nothing to print. The sequence is empty...");
+            }
+            if (n - 1 > manyItems || n - 1 < 0) {
+                throw new IllegalStateException("Cannot setCurrent() to a invalid position in sequence...");
+            }
+            setCurrent(n);
+            answer = getCurrent();
+        } catch (Exception err) {
+            System.out.println(err.getMessage());
+        }
+        return answer;
+    }
+
+    /**
+     * A method to compare two DoubleArraySeq objects and determine if they are equivalent.
+     * @param obj
+     *   The sequence that is being compared to the current sequence.
+     * @postcondition
+     *   If the sequences being compared are equivalent, then equals will return true. Otherwise, equals will return false.
+     **/
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = true;
+        if (obj instanceof DoubleArraySeq) {
+            DoubleArraySeq input = (DoubleArraySeq) obj;
+            if ( manyItems == input.manyItems ) {
+                for (int i = 0; i < manyItems; i++) {
+                    if (data[i] != input.data[i]) {
+                        result = false;
+                    }
+                }
+            } else {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * A method to print all elements of the sequence in order, separated by a space.
+     *
+     * @param - none
+     * @throws IllegalStateException Indicates that the sequence is empty.
+     * @precondition The sequence is not empty.
+     * @postcondition The elements of this sequence have been printed in order, separated by a space.
+     **/
+    public String toString() {
+        String output = "";
+        int savedIndexState = currentIndex;
+
+        try {
+            if (size() == 0) {
+                throw new IllegalStateException("Cannot toString, sequence is empty");
+            }
+            this.start();
+            for (int i = 0; i < manyItems; i++) {
+                output += this.getCurrent() + " ";
+                this.advance();
+            }
+
+        } catch (Exception err) {
+            System.out.println(err.getMessage());
+        }
+
+        currentIndex = savedIndexState;
+        return output;
+    }
+
 
     /**
      * Reduce the current capacity of this sequence to its actual size (i.e., the
@@ -398,19 +521,6 @@ public class DoubleArraySeq implements Cloneable {
             System.arraycopy(data, 0, trimmedArray, 0, manyItems);
             data = trimmedArray;
         }
-    }
-
-    // Print Sequence
-    public void print() {
-        System.out.print("Sequence: ");
-        for (double item : data) {
-            System.out.print(item + " ");
-        }
-        System.out.println();
-    }
-
-    public void setIndex(int index) {
-        currentIndex = index;
     }
 }
 

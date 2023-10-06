@@ -24,21 +24,21 @@ public class Main {
 //        System.out.println();
 
 //        TEST ADD-BEFORE
-        DoubleArraySeq test = new DoubleArraySeq(0);
-        test.addBefore(1);
-        test.print();
-        test.addBefore(2);
-        test.print();
-        test.addBefore(3);
-        test.print();
-        test.addBefore(4);
-        test.print();
-        test.setIndex(1);
-        test.addBefore(5);
-        test.print();;
-        test.setIndex(1);
-        test.addBefore(6);
-        test.print();
+//        DoubleArraySeq test = new DoubleArraySeq(0);
+//        test.addBefore(1);
+//        test.print();
+//        test.addBefore(2);
+//        test.print();
+//        test.addBefore(3);
+//        test.print();
+//        test.addBefore(4);
+//        test.print();
+//        test.setIndex(1);
+//        test.addBefore(5);
+//        test.print();;
+//        test.setIndex(1);
+//        test.addBefore(6);
+//        test.print();
 
 //        TEST ADD-ALL
 //        DoubleArraySeq test = new DoubleArraySeq(0);
@@ -75,6 +75,19 @@ public class Main {
 //        System.out.println(test2.getCurrent());
 //        test2.advance();
 //        System.out.println(test2.isCurrent());
+
+//        TEST CONCATINATION
+//        DoubleArraySeq test = new DoubleArraySeq(0);
+//        test.addAfter(5);
+//        test.addAfter(5);
+//        test.print();
+//
+//        DoubleArraySeq test2 = new DoubleArraySeq(0);
+//        test2.addAfter(2);
+//        test2.addAfter(2);
+//
+//        DoubleArraySeq newSeq = DoubleArraySeq.concatenation(test, test2);
+//        System.out.println(newSeq);
 
 //        int[] arr = new int[]{5,2,5,0,0,0};
 //        System.arraycopy(arr, 0, arr, 3, 1);
