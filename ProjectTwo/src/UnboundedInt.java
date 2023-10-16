@@ -17,12 +17,12 @@ public class UnboundedInt {
     public UnboundedInt(String input){
         manyNodes = input.length();
         String temp;
-        int tempValue, count;
+        int tempValue, count = 2;
 
         temp = input.substring(0, 2);
         tempValue = Integer.parseInt(temp);
 
-        front(tempValue);
+        front = new IntNode(tempValue, null);
 
         cursor = front;
 
@@ -30,7 +30,8 @@ public class UnboundedInt {
             temp = input.substring(x, (x + 3));
             tempValue = Integer.parseInt(temp);
             cursor.addNodeAfter(tempValue);
-            cursor = cursor.listPosition(front, count);
+            cursor = IntNode.listPosition(front, count);
+            count++;
         }
 
         back = cursor;
@@ -46,24 +47,28 @@ public class UnboundedInt {
             }else{
                 cursor = cursor.getLink();
             }
-        }catch IllegalStateException();
+        }catch(IllegalStateException e){
+            return;
+        }
     }
 
     //a method that returns the integer value of the Node that is pointed to by the cursor.
     //Throws an IllegalStateException if the cursor is not pointing to a Node
     public int getNodeValue(){
         try{
-            if(cursor.getData() == null){
+            if(cursor == null){
                 throw new IllegalStateException();
             }else{
                 return cursor.getData();
             }
-        }catch IllegalStateException();
+        }catch(IllegalStateException e){
+            return -1;
+        }
     }
 
     //Same as toString but no commas in string.
     public String toStringNoCommas(){
-
+        return "";
     }
 
     //Creates a string of all elements in order separated by commas,
@@ -73,14 +78,16 @@ public class UnboundedInt {
         String output = "";
 
         try{
-            if(front.getData() == null){
+            if(front == null){
                 throw new IllegalStateException();
             }else{
                 start();
                 output += cursor.getData() + ",";
                 advance();
             }
-        }catch IllegalStateException();
+        }catch(IllegalStateException e){
+            return "";
+        }
 
         return output;
     }

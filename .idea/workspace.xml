@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d1c7fa82-8772-44f9-ac7e-47d360d3a2f8" name="Changes" comment="Started working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectTwo/ProjectTwo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectTwo/ProjectTwo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectTwo/src/LargeNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectTwo/src/LargeNumberTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectTwo/src/UnboundedInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectTwo/src/UnboundedInt.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +39,12 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/dizzy/Documents/School/yr 3 semsester 1/csc103 - Data Structures/cscProject/ProjectTwo/src"
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "last_opened_file_path": "C:/Users/dizzy/Documents/School/yr 3 semsester 1/csc103 - Data Structures/cscProject/ProjectTwo",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -57,7 +64,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697495398209</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Started working">
+      <option name="closed" value="true" />
+      <created>1697495968123</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697495968123</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
