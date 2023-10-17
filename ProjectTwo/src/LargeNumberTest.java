@@ -1,3 +1,4 @@
+//Samuel Acquaviva, James Ji
 import java.util.Scanner;
 
 public class LargeNumberTest{
@@ -13,6 +14,7 @@ public class LargeNumberTest{
         UnboundedInt num2 = new UnboundedInt(input);
 
         System.out.println(num1.toString());
+        System.out.println(num2.toString());
 
     }
 }
