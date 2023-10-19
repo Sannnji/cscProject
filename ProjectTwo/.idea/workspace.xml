@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3a62827-1e46-4aa6-b80e-1f34159f35c2" name="Changes" comment="Not completely working yet, output is messed up. I think the way I'm storing ints in the nodes is the problem.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/UnboundedInt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectTwo/UnboundedInt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/IntNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/LargeNumberTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/UnboundedInt.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LargeNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LargeNumberTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UnboundedInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnboundedInt.java" afterDir="false" />
     </list>
@@ -18,6 +22,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -26,15 +33,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/dizzy/Documents/School/yr 3 semsester 1/csc103 - Data Structures/cscProject/ProjectTwo&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/dizzy/Documents/School/yr 3 semsester 1/csc103 - Data Structures/cscProject/ProjectTwo",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="LargeNumberTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LargeNumberTest" />
+      <module name="ProjectTwo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LargeNumberTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

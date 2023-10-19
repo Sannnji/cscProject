@@ -6,15 +6,19 @@ public class LargeNumberTest{
         Scanner kb = new Scanner(System.in);
         String input;
 
-        System.out.print("Please input the first number\n>");
-        input = kb.nextLine();
-        UnboundedInt num1 = new UnboundedInt(input);
-        System.out.print("Please input the second number\n>");
-        input = kb.nextLine();
-        UnboundedInt num2 = new UnboundedInt(input);
+//        System.out.print("Please input the first number\n>");
+//        input = kb.nextLine();
+//        UnboundedInt num1 = new UnboundedInt(input);
+//        System.out.print("Please input the second number\n>");
+//        input = kb.nextLine();
+//        UnboundedInt num2 = new UnboundedInt(input);
+
+
+        UnboundedInt num1 = new UnboundedInt("1234567809");
+        UnboundedInt num2 = new UnboundedInt("123456789");
+//        UnboundedInt.add(num1, num2);
 
         System.out.println(num1.toString());
         System.out.println(num2.toString());
-
     }
 }

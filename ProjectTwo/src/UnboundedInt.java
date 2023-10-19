@@ -1,5 +1,4 @@
 public class UnboundedInt {
-
     //An integer called manyNodes that equals the number of Nodes
     private int manyNodes;
 
@@ -13,31 +12,39 @@ public class UnboundedInt {
     private IntNode cursor;
 
     //This constructor will take a string of digits(no commas) and turn it into an UnboundedInt object (MUST BE STRING INPUT)
-    public UnboundedInt(String input){
+    public UnboundedInt(String input) {
         String temp;            //Used to temporarily hold a String containing 3 integers
-        String checkedInput;    //Used to hold validated input (String length is divisible by 3)
+        String formattedInput;    //Used to hold validated input (String length is divisible by 3)
         int count;              //Used to iterate through the checkedInput string
 
-        checkedInput = inputStringVal(input);
-        manyNodes = input.length() / 3;
+        formattedInput = inputStringVal(input);
+        int nodesNeeded = formattedInput.length()/3;
 
-        temp = checkedInput.substring(0, 3);
+        System.out.println(formattedInput);
 
+        temp = formattedInput.substring(formattedInput.length() - 3);
         front = new IntNode(Integer.parseInt(temp), null);
+        manyNodes++;
+        back = front;
         cursor = front;
 
-        start();
-        if(manyNodes > 1){
-            for(count = 1; count <= manyNodes; count++){
-                cursor = IntNode.listPosition(front, count);
-                temp = checkedInput.substring((count * 3), ((count * 3) + 3));
-                cursor.addNodeAfter(Integer.parseInt(temp));
-                advance();
-            }
-            front.setLink(IntNode.listPosition(front, 2));
-        }
+        temp = formattedInput.substring(6, 9);
+        front = new IntNode(Integer.parseInt(temp), front);
+        manyNodes++;
+        System.out.println(toString());
 
-        back = cursor;
+//        if(nodesNeeded > 1){
+//            for(count = nodesNeeded - 1; count > 0; count--){
+//                temp = formattedInput.substring((count * 3) - 3, ((count * 3)));
+//                System.out.println("temp: " + temp);
+//                front = new IntNode(Integer.parseInt(temp), front);
+//                System.out.println(toString());
+//                System.out.println(count);
+//                System.out.println();
+//                manyNodes++;
+//            }
+//        }
+
         start();
     }
 
@@ -45,7 +52,7 @@ public class UnboundedInt {
     private String inputStringVal(String input){
         int remainder = (input.length() % 3);
 
-        if(remainder == 1){
+        if(remainder == 1) {
             return "00" + input;
         }else if(remainder == 2){
             return "0" + input;
@@ -80,19 +87,20 @@ public class UnboundedInt {
     //Throw an IllegalStateException if the sequence is empty
     public String toString(){
         String output = "";
-
         if(front == null){
             throw new IllegalStateException();
         }else{
             if(manyNodes > 1) {
                 start();
-                for (int x = 0; x < manyNodes; x++) {
-                    output += cursor.getData() + ",";
+                for (int x = 0; x <= manyNodes; x++) {
+                    if (x == 0) {
+                        output += cursor.getData();
+                    }
+                    output = cursor.getData() + "," + output;
                     advance();
                 }
-                output += back.getData();
             }else{
-                output += front.getData();
+                output = front.getData() + output;
             }
         }
 
@@ -102,6 +110,64 @@ public class UnboundedInt {
     //set the cursor to the front of the list
     public void start(){
         this.cursor = front;
+    }
+
+    public static void add (UnboundedInt num1, UnboundedInt num2) {
+        int i = 0;
+        int remainder = 0;
+        String bigIntSum = "";
+
+        while (i <= Math.max(num1.manyNodes, num2.manyNodes)) {
+            int sum = 0;
+            String temp = "";
+            Boolean num1HasNodeAtIndex = i <= num1.manyNodes;
+            Boolean num2HasNodeAtIndex = i <= num2.manyNodes;
+
+            System.out.println("data: " + num1.cursor.getData());
+            System.out.println("data2: " + num2.cursor.getData());
+            System.out.println(num1HasNodeAtIndex && num2HasNodeAtIndex);
+            if ( num1HasNodeAtIndex && num2HasNodeAtIndex ) {
+                sum = num1.cursor.getData() + num2.cursor.getData() + remainder;
+                System.out.println("sum: " + sum);
+            } else if (num1HasNodeAtIndex && !num2HasNodeAtIndex) {
+                sum = num1.cursor.getData() + remainder;
+            } else if (!num1HasNodeAtIndex && num2HasNodeAtIndex) {
+                sum = num2.cursor.getData() + remainder;
+            } else {
+                sum = remainder;
+            }
+            remainder = 0;
+
+            Integer sumObj = sum;
+            String sumStr = sumObj.toString();
+            Boolean remainderPresent = sumStr.length() > 3;
+
+            if (sumStr.length() < 3) {
+                while (sumStr.length() != 3) {
+                    sumStr = "0" + sumStr;
+                }
+            }
+
+            if ( remainderPresent ) {
+                temp = sumStr.substring(1,4);
+                remainder = Integer.parseInt(sumStr.substring(0,1));
+            } else {
+                temp = sumStr.substring(0,3);
+            }
+
+
+            bigIntSum = temp + bigIntSum;
+
+            System.out.println(remainder);
+            System.out.println(temp);
+            System.out.println();
+
+            num1.advance();
+            num2.advance();
+            i++;
+        }
+
+        System.out.println(bigIntSum);
     }
 
     /**
