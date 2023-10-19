@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a62827-1e46-4aa6-b80e-1f34159f35c2" name="Changes" comment="Not completely working yet, output is messed up. I think the way I'm storing ints in the nodes is the problem.">
+    <list default="true" id="a3a62827-1e46-4aa6-b80e-1f34159f35c2" name="Changes" comment="Exceptions are somewhat fixed but commented out for testing. All methods working rn.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/UnboundedInt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectTwo/UnboundedInt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectTwo/LargeNumberTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectTwo/LargeNumberTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LargeNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LargeNumberTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UnboundedInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UnboundedInt.java" afterDir="false" />
     </list>
@@ -17,6 +17,21 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;rRadica3&quot;,
+    &quot;author&quot;: &quot;Sannnji&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="204caf8c-89c2-4206-8ad0-0b533dbc753b" />
+        <option name="url" value="https://github.com/Sannnji/cscProject.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -60,13 +75,22 @@
       <option name="project" value="LOCAL" />
       <updated>1697504124647</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Exceptions are somewhat fixed but commented out for testing. All methods working rn.">
+      <option name="closed" value="true" />
+      <created>1697573161237</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697573161237</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed some stuff up for testing" />
     <MESSAGE value="Worked a bit more, output is a bit messed up rn. I think the way I'm storing the intnodes is messed up so I'm gonna keep working on it." />
     <MESSAGE value="Not completely working yet, output is messed up. I think the way I'm storing ints in the nodes is the problem." />
-    <option name="LAST_COMMIT_MESSAGE" value="Not completely working yet, output is messed up. I think the way I'm storing ints in the nodes is the problem." />
+    <MESSAGE value="Exceptions are somewhat fixed but commented out for testing. All methods working rn." />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions are somewhat fixed but commented out for testing. All methods working rn." />
   </component>
 </project>

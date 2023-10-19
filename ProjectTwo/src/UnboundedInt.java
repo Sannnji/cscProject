@@ -1,3 +1,4 @@
+
 public class UnboundedInt {
 
     //An integer called manyNodes that equals the number of Nodes
@@ -28,13 +29,23 @@ public class UnboundedInt {
 
         start();
         if(manyNodes > 1){
-            for(count = 1; count <= manyNodes; count++){
-                cursor = IntNode.listPosition(front, count);
-                temp = checkedInput.substring((count * 3), ((count * 3) + 3));
-                cursor.addNodeAfter(Integer.parseInt(temp));
-                advance();
+            if(input.length() % 3 == 0) {
+                for (count = 1; count <= manyNodes; count++) {
+                    cursor = IntNode.listPosition(front, count);
+                    temp = checkedInput.substring((count * 3), ((count * 3) + 3));
+                    cursor.addNodeAfter(Integer.parseInt(temp));
+                    advance();
+                }
+                front.setLink(IntNode.listPosition(front, 2));
+            }else{
+                for(count = 1; count < manyNodes; count++){
+                    cursor = IntNode.listPosition(front, count);
+                    temp = checkedInput.substring((count * 3), ((count * 3) + 3));
+                    cursor.addNodeAfter(Integer.parseInt(temp));
+                    advance();
+                }
+                front.setLink(IntNode.listPosition(front, 2));
             }
-            front.setLink(IntNode.listPosition(front, 2));
         }
 
         back = cursor;
@@ -162,20 +173,32 @@ public class UnboundedInt {
         System.out.println(bigIntSum);
     }
 
-    /**
-    UnboundedInt add (UnboundedInt )
-    A method that adds the current UnboundedInt with a passed in one.  The return is a new UnboundedInt.
+    /*
+    //A method that multiplies the current UnboundedInt with a passed in one.  The return is a new UnboundedInt.
+    public UnboundedInt multiply(UnboundedInt){
 
-    UnboundedInt multiply (UnboundedInt )  - do this one last!
-    A method that multiplies the current UnboundedInt with a passed in one.  The return is a new UnboundedInt.
+    }
 
-    void addEnd  ( int )  -optional method (helpful)
-    A method to add a new element at the end of the sequence , used for building up each higher term in a single sequence.  (i.e. adding a new IntNode to the linked list)
+     */
 
-    UnboundedInt clone(  )
-    a method that returns a copy of the original structure
+    //A method to add a new element at the end of the sequence , used for building up each higher term in a single sequence.
+    //(i.e. adding a new IntNode to the linked list)
+    void addEnd(int item) {
+        back.addNodeAfter(item);
+        back = IntNode.listPosition(front, IntNode.listLength(front));
+        manyNodes++;
+    }
+    /*
+    //a method that returns a copy of the original structure
+    public UnboundedInt clone(){
 
-    boolean equals ( Object )
-    a method that returns true if linked list represents the same numerical number as the input parameter.  False otherwise.  Overrides method in Object class.
-    **/
+    }
+
+    //a method that returns true if linked list represents the same numerical number as the input parameter.  False otherwise.  Overrides method in Object class.
+    public boolean equals(UnboundedInt object){
+
+    }
+
+     */
+
 }
