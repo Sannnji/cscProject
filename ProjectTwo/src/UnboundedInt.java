@@ -104,6 +104,64 @@ public class UnboundedInt {
         this.cursor = front;
     }
 
+    public static void add (UnboundedInt num1, UnboundedInt num2) {
+        int i = 0;
+        int remainder = 0;
+        String bigIntSum = "";
+
+        while (i <= Math.max(num1.manyNodes, num2.manyNodes)) {
+            int sum = 0;
+            String temp = "";
+            Boolean num1HasNodeAtIndex = i <= num1.manyNodes;
+            Boolean num2HasNodeAtIndex = i <= num2.manyNodes;
+
+            System.out.println("data: " + num1.cursor.getData());
+            System.out.println("data2: " + num2.cursor.getData());
+            System.out.println(num1HasNodeAtIndex && num2HasNodeAtIndex);
+            if ( num1HasNodeAtIndex && num2HasNodeAtIndex ) {
+                sum = num1.cursor.getData() + num2.cursor.getData() + remainder;
+                System.out.println("sum: " + sum);
+            } else if (num1HasNodeAtIndex && !num2HasNodeAtIndex) {
+                sum = num1.cursor.getData() + remainder;
+            } else if (!num1HasNodeAtIndex && num2HasNodeAtIndex) {
+                sum = num2.cursor.getData() + remainder;
+            } else {
+                sum = remainder;
+            }
+            remainder = 0;
+
+            Integer sumObj = sum;
+            String sumStr = sumObj.toString();
+            Boolean remainderPresent = sumStr.length() > 3;
+
+            if (sumStr.length() < 3) {
+                while (sumStr.length() != 3) {
+                    sumStr = "0" + sumStr;
+                }
+            }
+
+            if ( remainderPresent ) {
+                temp = sumStr.substring(1,4);
+                remainder = Integer.parseInt(sumStr.substring(0,1));
+            } else {
+                temp = sumStr.substring(0,3);
+            }
+
+
+            bigIntSum = temp + bigIntSum;
+
+            System.out.println(remainder);
+            System.out.println(temp);
+            System.out.println();
+
+            num1.advance();
+            num2.advance();
+            i++;
+        }
+
+        System.out.println(bigIntSum);
+    }
+
     /**
     UnboundedInt add (UnboundedInt )
     A method that adds the current UnboundedInt with a passed in one.  The return is a new UnboundedInt.
