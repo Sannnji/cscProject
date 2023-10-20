@@ -1,6 +1,8 @@
-// File: IntNode.java 
-// Complete documentation is available from the IntNode link in:
-//   http://www.cs.colorado.edu/~main/docs
+/**
+ Authors: Samuel Acquaviva, James Ji
+
+ Description: A professor provided IntNode class
+ **/
 
 /******************************************************************************
 * An IntNode provides a node for a linked list with 
