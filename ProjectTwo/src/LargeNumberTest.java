@@ -17,12 +17,15 @@ public class LargeNumberTest{
         UnboundedInt clone;
 
         //Gets the first 2 UnboundedInts
-        System.out.print("Please input the first number\n>");
-        input = kb.nextLine();
-        num1 = new UnboundedInt(input);
-        System.out.print("Please input the second number\n>");
-        input = kb.nextLine();
-        num2 = new UnboundedInt(input);
+//        System.out.print("Please input the first number\n>");
+//        input = kb.nextLine();
+//        num1 = new UnboundedInt(input);
+//        System.out.print("Please input the second number\n>");
+//        input = kb.nextLine();
+//        num2 = new UnboundedInt(input);
+
+        num1 = new UnboundedInt("123456789");
+        num2 = new UnboundedInt("1234567809");
 
         //Main loop runs, each time asking the user to make a menu choice. Choices are executed via a switch statement.
         while(run){

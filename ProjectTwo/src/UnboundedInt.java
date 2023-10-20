@@ -14,41 +14,51 @@ public class UnboundedInt {
     private IntNode cursor;
 
     //This constructor will take a string of digits(no commas) and turn it into an UnboundedInt object (MUST BE STRING INPUT)
-    public UnboundedInt(String input){
+    public UnboundedInt(String input) {
         String temp;            //Used to temporarily hold a String containing 3 integers
-        String checkedInput;    //Used to hold validated input (String length is divisible by 3)
+        String formattedInput;    //Used to hold validated input (String length is divisible by 3)
         int count;              //Used to iterate through the checkedInput string
 
-        checkedInput = inputStringVal(input);
-        manyNodes = input.length() / 3;
+        formattedInput = inputStringVal(input);
+        int nodesNeeded = formattedInput.length()/3;
+        manyNodes = 0;
+//        System.out.println(nodesNeeded);
+        System.out.println(formattedInput);
 
-        temp = checkedInput.substring(0, 3);
 
-        front = new IntNode(Integer.parseInt(temp), null);
-        cursor = front;
+//        temp = formattedInput.substring(formattedInput.length() - 3);
+//        manyNodes++;
+//        front = new IntNode(Integer.parseInt(temp), null);
+//        back = front;
+//        cursor = front;
 
-        start();
-        if(manyNodes > 1){
-            if(input.length() % 3 == 0) {
-                for (count = 1; count <= manyNodes; count++) {
-                    cursor = IntNode.listPosition(front, count);
-                    temp = checkedInput.substring((count * 3), ((count * 3) + 3));
-                    cursor.addNodeAfter(Integer.parseInt(temp));
-                    advance();
+//        System.out.println(manyNodes);
+
+//        temp = formattedInput.substring(6, 9);
+//        front = new IntNode(Integer.parseInt(temp), front);
+//        System.out.println(toString());
+
+//        if(manyNodes >= 1){
+
+            for(count = 0; count < nodesNeeded; count++){
+                System.out.println("loop: " + count);
+                temp = formattedInput.substring((count * 3) , ((count * 3) + 3));
+                System.out.println("temp: " + temp);
+//                System.out.println("before: " + toString());
+//                front.setLink(new IntNode(Integer.parseInt(temp), null));
+                manyNodes++;
+                if (count == 0) {
+                    front = new IntNode(Integer.parseInt(temp), null);
+                    back = front;
+                } else {
+                    front = new IntNode(Integer.parseInt(temp), front);
                 }
-                front.setLink(IntNode.listPosition(front, 2));
-            }else{
-                for(count = 1; count < manyNodes; count++){
-                    cursor = IntNode.listPosition(front, count);
-                    temp = checkedInput.substring((count * 3), ((count * 3) + 3));
-                    cursor.addNodeAfter(Integer.parseInt(temp));
-                    advance();
-                }
-                front.setLink(IntNode.listPosition(front, 2));
+
+                System.out.println("after: " + toString());
+                System.out.println();
             }
-        }
+//        }
 
-        back = cursor;
         start();
     }
 
@@ -200,5 +210,41 @@ public class UnboundedInt {
     }
 
      */
+    public boolean equals(Object obj) {
+
+        if(obj instanceof UnboundedInt) {
+            UnboundedInt current = (UnboundedInt) obj;
+
+            if(manyNodes != current.manyNodes)
+                return false;
+
+            IntNode passed = current.front;
+            for(IntNode called = front; called != null; called = called.getLink()) {
+                if(called.getData() != passed.getData())
+                    return false;
+                passed = passed.getLink();
+            }
+
+        }
+
+        return true;
+
+    }
+
+    public Object clone() {
+
+        UnboundedInt clonedNum;
+
+        try {
+            clonedNum = (UnboundedInt) super.clone( );
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException("This class does not implement Cloneable");
+        }
+
+        clonedNum.front = IntNode.listCopy(front);
+
+        return clonedNum;
+    }
 
 }
