@@ -167,5 +167,28 @@ public class LinkedStack<E> implements Cloneable
       // The generic listLength method gets the type of E from top.
       return Node.listLength(top);
    }
- 
+
+   public Node<E> itemAt(int position) {
+      int i;
+      LinkedStack<E> temp = new LinkedStack<E>();
+      LinkedStack<E> answer;
+
+      if (position > size()) {
+         throw new IllegalArgumentException("The provided position is out of bounds");
+      } else if (size() == 0) {
+         throw new IllegalArgumentException("You cannot perform this method on an empty LinkedStack");
+      }
+
+      for (i = 0; i < position; i++) {
+         temp.push(this.pop());
+      }
+
+      answer = temp.clone();
+
+      for (int j = i; j !=0; j--) {
+         this.push(temp.pop());
+      }
+
+      return answer.top;
+   }
 }

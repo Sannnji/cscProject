@@ -13,7 +13,7 @@ public class Queen {
             isConflicted = true;
         } else if (queen.y == y) {
             isConflicted = true;
-        } 
+        }
 
         return isConflicted;
     }
