@@ -1,17 +1,30 @@
 public class Queen {
-    private int x;
-    private int y;
+    private int row;
+    private int column;
 
-    Queen (int x, int y) {
-        this.x = x;
-        this.y = y;
+    public int getRow() {
+        return row;
+    }
+    public int getCol() {
+        return column;
+    }
+
+    Queen (int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
     public boolean conflict(Queen queen) {
         boolean isConflicted = false;
-        if (queen.x == x) {
+        double slope = (queen.row - row) != 0 ? (queen.column - column) / (queen.row - row) : 0;
+
+        if (queen.row == row || queen.column == column) {
+            System.out.println("x y conflict");
             isConflicted = true;
-        } else if (queen.y == y) {
+        }
+        // if the slope between two points is 1 or -1 that means it is directly diagonal in some direction
+        if (slope == 1 || slope == -1) {
+            System.out.println("Diagonal conflict: slope = " + slope);
             isConflicted = true;
         }
 
@@ -19,6 +32,6 @@ public class Queen {
     }
 
     public String toString() {
-        return "Coordinate: (" + x + ", " + y + ")";
+        return "Coordinate: (" + row + ", " + column + ")";
     }
 }

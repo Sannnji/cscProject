@@ -168,27 +168,21 @@ public class LinkedStack<E> implements Cloneable
       return Node.listLength(top);
    }
 
-   public Node<E> itemAt(int position) {
-      int i;
-      LinkedStack<E> temp = new LinkedStack<E>();
-      LinkedStack<E> answer;
-
+   public Object itemAt(int position) {
       if (position > size()) {
          throw new IllegalArgumentException("The provided position is out of bounds");
       } else if (size() == 0) {
          throw new IllegalArgumentException("You cannot perform this method on an empty LinkedStack");
       }
 
-      for (i = 0; i < position; i++) {
-         temp.push(this.pop());
+      int i = 0;
+      Object answer = top.getData();
+
+      for (Node<E> cursor = top; i < position; i++) {
+         cursor = cursor.getLink();
+         answer = cursor.getData();
       }
 
-      answer = temp.clone();
-
-      for (int j = i; j !=0; j--) {
-         this.push(temp.pop());
-      }
-
-      return answer.top;
+      return answer;
    }
 }

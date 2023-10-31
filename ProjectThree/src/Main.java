@@ -12,7 +12,7 @@ public class Main {
         linkedStack.push(4);
         linkedStack.push(5);
 
-        Node<Integer> node = linkedStack.itemAt(4);
+        Node<Integer> node = (Node<Integer>) linkedStack.itemAt(4);
 
         System.out.println(node.getData());
     }
