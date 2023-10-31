@@ -46,15 +46,19 @@ public class QueenSimulation {
 
                         // **********************************ERROR HERE****************************************
                         if (column == boardSize && isConflicted) {
-                            row = solutionStack.peek().getRow();
 //                            column = solutionStack.peek().getCol() + 1 > boardSize ? 1 : solutionStack.peek().getCol() + 1 ;
+                            // pop queen from stack if it's already at the last square in the row
                             if (solutionStack.peek().getCol() + 1 > boardSize) {
                                 solutionStack.pop();
-                            } else {
+                                row = solutionStack.peek().getRow();
                                 column = solutionStack.peek().getCol() + 1;
+                            } else {
+                                row = solutionStack.peek().getRow();
+                                column = solutionStack.peek().getCol() + 1;
+                                solutionStack.pop();
                             }
-                            System.out.println(solutionStack.size());
 
+                            System.out.println(solutionStack.size());
                             System.out.println(solutionStack.size());
                         } else {
                             column++;
