@@ -169,7 +169,7 @@ public class LinkedStack<E> implements Cloneable
    }
 
    public Object itemAt(int position) {
-      if (position > size()) {
+      if (position > size() - 1) {
          throw new IllegalArgumentException("The provided position is out of bounds");
       } else if (size() == 0) {
          throw new IllegalArgumentException("You cannot perform this method on an empty LinkedStack");

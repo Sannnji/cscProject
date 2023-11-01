@@ -3,11 +3,24 @@ import java.util.Scanner;
 public class QueenSimulation {
     // constant for the starting position for row and column
     static final int STARTING_POS = 1;
-    static int solutions = 0, row = STARTING_POS, column = STARTING_POS;
-    static boolean solutionFound = false, isConflicted = false;
+    static int solutionCount = 0, row = STARTING_POS, column = STARTING_POS;
+    static boolean allSolutionsFound = false, isConflicted = false;
     static String solutionSet = "";
     static Scanner usrInput = new Scanner(System.in);
     static LinkedStack<Queen> solutionStack = new LinkedStack<Queen>();
+
+    // backtrack pop method
+    // pops a queen in the stack when the queen being placed has no available spots on the row
+    // and set the popped queen to current queen with + 1 to column
+    // if the queen being popped is
+    public static void popQueenAtColEnd(int boardSize) {
+        if (solutionStack.peek().getCol() + 1 > boardSize) {
+            solutionStack.pop();
+        }
+        row = solutionStack.peek().getRow();
+        column = solutionStack.peek().getCol() + 1;
+        solutionStack.pop();
+    }
 
     public static void pushQueen(Queen queen) {
         solutionStack.push(queen);
@@ -26,86 +39,60 @@ public class QueenSimulation {
         System.out.println("Sounds good, the simulation will now begin populating a " + boardSize + " x " + boardSize + " size board");
         System.out.println();
 
-
-
-        while (!solutionFound) {
-//            System.out.println("(" + row + ", " + column + ")");
-            int stackSize = solutionStack.size();
+        while (!allSolutionsFound) {
             Queen queen = new Queen(row, column);
             System.out.println("Location of the Queen being placed: " + queen.toString());
 
-            // push queen onto stack if it's empty
-            if (stackSize == 0) {
-                pushQueen(queen);
-            } else {
-                for (int i = 0; i < stackSize; i++) {
-                    if ( queen.conflict((Queen) solutionStack.itemAt(i)) ) {
-                        isConflicted = true;
-                        System.out.println("Conflict with " + solutionStack.itemAt(i).toString());
-                        System.out.println();
-
-                        // **********************************ERROR HERE****************************************
-                        if (column == boardSize && isConflicted) {
-//                            column = solutionStack.peek().getCol() + 1 > boardSize ? 1 : solutionStack.peek().getCol() + 1 ;
-                            // pop queen from stack if it's already at the last square in the row
-                            if (solutionStack.peek().getCol() + 1 > boardSize) {
-                                solutionStack.pop();
-                                row = solutionStack.peek().getRow();
-                                column = solutionStack.peek().getCol() + 1;
-                            } else {
-                                row = solutionStack.peek().getRow();
-                                column = solutionStack.peek().getCol() + 1;
-                                solutionStack.pop();
-                            }
-
-                            System.out.println(solutionStack.size());
-                            System.out.println(solutionStack.size());
-                        } else {
-                            column++;
-                        }
-
-//                        System.out.println("Coordinate: (" + row + ", " + column + ")");
-                    }
-                    if (isConflicted) {
-                        break;
-                    }
-                }
-
-                // push queen if no conflicts were found
-                if (!isConflicted) {
-                    pushQueen(queen);
-                }
-
-
-                // reset isConflicted
-                isConflicted = false;
-                // the number of solutions is dictated by the number rows and since our board is a square
-                // we can use boardSize for the checking value
-                if (solutionStack.size() == boardSize) {
-                    // print solution coordinates from top to bottom (according to board)
-                    for (int i = solutionStack.size() - 1; i >= 0; i--) {
-                        if (solutionSet.length() != 0 ) {
-                            solutionSet += ", " + solutionStack.itemAt(i).toString();
-                        } else {
-                            solutionSet += solutionStack.itemAt(i).toString();
-                        }
-                    }
-                    System.out.println(solutionSet);
+            // check for conflicts, break from loop if one is found
+            for (int i = 0; i < solutionStack.size(); i++) {
+                if (queen.conflict((Queen) solutionStack.itemAt(i))) {
+                    isConflicted = true;
+                    System.out.println(" with " + solutionStack.itemAt(i).toString());
                     System.out.println();
+                }
+                if (isConflicted) break;
+            }
 
-                    System.out.print("Would you like to continue and find another solution set? (yes = 1, no = 0): ");
-                    int findAnotherSolution = usrInput.nextInt();
+            // backtrack
+            // if column is equal to board size and is conflicted
+            // otherwise increment column
+            if (column == boardSize && isConflicted) {
+                // this is the exiting loop
+                // if we have to backtrack to (1,5) then that means we've discovered all the possible solution
+                if (solutionStack.peek().getRow() == 1 && solutionStack.peek().getCol() == boardSize) {
+                    allSolutionsFound = true;
+                } else {
+                    // backtrack
+                    popQueenAtColEnd(boardSize);
+                }
+            } else {
+                column++;
+            }
 
-                    if (findAnotherSolution == 1) {
-                        row = solutionStack.peek().getRow();
-                        column = solutionStack.peek().getCol() + 1;
-                        solutionStack.pop();
-                        solutionSet = "";
+            // push queen if no conflicts were found
+            if (!isConflicted) pushQueen(queen);
+
+            // reset isConflicted
+            isConflicted = false;
+            // a solution set is found when the number of queens in the solution stack is equal to the number of rows
+            if (solutionStack.size() == boardSize) {
+                solutionCount++;
+                // print solution coordinates from top to bottom (according to board)
+                solutionSet += "Solution #" + solutionCount + ": ";
+                for (int i = solutionStack.size() - 1; i >= 0; i--) {
+                    if (i != solutionStack.size() - 1) {
+                        solutionSet += ", " + solutionStack.itemAt(i).toString();
                     } else {
-                        solutionFound = true;
+                        solutionSet += solutionStack.itemAt(i).toString();
                     }
                 }
+                solutionSet += "\n";
+                popQueenAtColEnd(boardSize);
             }
+
         }
+
+        System.out.println(solutionSet);
+        System.out.println("The total number of solutions for a " + boardSize + " x " + boardSize + " is " + solutionCount);
     }
 }

@@ -16,15 +16,15 @@ public class Queen {
 
     public boolean conflict(Queen queen) {
         boolean isConflicted = false;
-        double slope = (queen.row - row) != 0 ? (queen.column - column) / (queen.row - row) : 0;
+        double slope = (queen.row - row) != 0 ? (double)(queen.column - column) / (queen.row - row) : 0.0;
 
         if (queen.row == row || queen.column == column) {
-            System.out.println("x y conflict");
+            System.out.print("X Y conflict");
             isConflicted = true;
         }
         // if the slope between two points is 1 or -1 that means it is directly diagonal in some direction
         if (slope == 1 || slope == -1) {
-            System.out.println("Diagonal conflict: slope = " + slope);
+            System.out.print("Diagonal conflict");
             isConflicted = true;
         }
 
@@ -32,6 +32,6 @@ public class Queen {
     }
 
     public String toString() {
-        return "Coordinate: (" + row + ", " + column + ")";
+        return "(row = " + row + ", column = " + column + ")";
     }
 }
