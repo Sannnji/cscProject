@@ -1,6 +1,10 @@
-// File: Node.java 
-// Complete documentation is available from the Node link in:
-//   http://www.cs.colorado.edu/~main/docs
+/******************************************************************************
+ *
+ * a provided node file for the project
+ *
+ * @author James Ji, Samuel Acquaviva
+ *
+ ******************************************************************************/
 
 
 /******************************************************************************
