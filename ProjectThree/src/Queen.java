@@ -1,4 +1,5 @@
 /******************************************************************************
+ *
  * A Queen object represents queen on a chess board. The object possesses
  * coordinates to indicate the position of the queen on the board.
  *

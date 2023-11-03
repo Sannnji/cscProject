@@ -1,6 +1,10 @@
-// File: LinkedStack.java
-// Complete documentation is available from the LinkedStack link in:
-//   http://www.cs.colorado.edu/~main/docs/
+/******************************************************************************
+ *
+ * A slightly modified version of LinkedStack that includes a itemAt method
+ *
+ * @author James Ji, Samuel Acquaviva
+ *
+ ******************************************************************************/
 
 
 import java.util.EmptyStackException;
@@ -168,6 +172,18 @@ public class LinkedStack<E> implements Cloneable
       return Node.listLength(top);
    }
 
+   /**
+    * Get the item at the given position from top of the stack.
+    * (top position = 0, the next at position = 1, and so on)
+    * @param position
+    * @postcondition
+    * 	The returned value is the item at the specified position from the
+    *   stacks top and the stack is unchanged
+    * @return
+    * 	The item at the given position from top of the stack
+    * @exception IllegalArgumentException
+    *
+    **/
    public Object itemAt(int position) {
       if (position > size() - 1) {
          throw new IllegalArgumentException("The provided position is out of bounds");

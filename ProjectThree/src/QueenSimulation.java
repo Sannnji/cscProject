@@ -1,4 +1,12 @@
-//James Ji, Samuel Acquaviva
+/******************************************************************************
+ *
+ * This class simulates the safe placement of queens on a board with a size determined by
+ * the users input
+ *
+ * @author James Ji, Samuel Acquaviva
+ *
+ ******************************************************************************/
+
 import java.util.Scanner;
 
 public class QueenSimulation {
