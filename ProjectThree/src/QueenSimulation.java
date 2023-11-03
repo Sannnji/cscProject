@@ -37,8 +37,6 @@ public class QueenSimulation {
     // and outputs the position of the Queen to the user.
     public static void pushQueen(Queen queen) {
         solutionStack.push(queen);
-        System.out.println("Queen placed at: " + queen.toString());
-        System.out.println();
         row++;
         column = STARTING_POS;
     }
@@ -50,21 +48,18 @@ public class QueenSimulation {
         System.out.print("What size board would you like to use?: ");
         int boardSize = usrInput.nextInt();
         System.out.println();
-        System.out.println("Sounds good, the simulation will now begin populating a " + boardSize + " x " + boardSize + " size board");
+        System.out.println("Sounds good, the simulation will now populate a " + boardSize + " x " + boardSize + " size board");
         System.out.println();
 
         // Main program loop
         while (!allSolutionsFound) {
             // Creates a new Queen object and prints the position of the queen
             Queen queen = new Queen(row, column);
-            System.out.println("Location of the Queen being placed: " + queen.toString());
 
             // Checks for conflicts and breaks from the loop if one is found.
             for (int i = 0; i < solutionStack.size(); i++) {
                 if (queen.conflict((Queen) solutionStack.itemAt(i))) {
                     isConflicted = true;
-                    System.out.println(" with " + solutionStack.itemAt(i).toString());
-                    System.out.println();
                 }
                 if (isConflicted) break;
             }
