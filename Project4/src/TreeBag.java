@@ -31,7 +31,8 @@ public class TreeBag<E extends Comparable> implements Cloneable
    //   1. The elements in the bag are stored in a binary search tree.
    //   2. The instance variable root is a reference to the root of the
    //      binary search tree (or null for an empty tree).
-   private BTNode<E> root;   
+   private BTNode<E> root;
+   public BTNode<E> cursor;
 
 
    /**
@@ -43,9 +44,39 @@ public class TreeBag<E extends Comparable> implements Cloneable
    * @exception OutOfMemoryError
    *   Indicates insufficient memory a new BTNode.
    **/
-   public void add(E element)
-   {      
-      // Implemented by student.
+   public void add(E element) {
+      BTNode<E> cursor = root;
+      boolean nodeAdded = false;
+      BTNode<E> newNode = new BTNode(element, null, null);
+
+      // Handle null root (empty tree) case
+      if (root == null){
+         root = newNode;
+      } else {
+         while (!nodeAdded){
+            if (element.compareTo(cursor.getData()) <= 0){
+               System.out.println(element.compareTo(cursor.getData()));
+               if (cursor.getLeft() == null) {
+                  cursor.setLeft(newNode);
+                  nodeAdded = true;
+               }
+               else {
+                  cursor = cursor.getLeft();
+               }
+            }
+            else {
+               if (cursor.getRight() == null) {
+                  cursor.setRight(newNode);
+                  nodeAdded = true;
+               }
+               else {
+                  cursor = cursor.getRight();
+               }
+            }
+         }
+      }
+
+      cursor = root;
    }
 
    /**
@@ -60,11 +91,44 @@ public class TreeBag<E extends Comparable> implements Cloneable
    *   the method returns null.
    *   The bag remains unchanged.
    **/
-   public E retrieve(E target)
-   {
-      // Student will replace this return statement with their own code:
-      return target;
-   }
+//   public E retrieve(E target) {
+//      boolean targetFound = false;
+//      BTNode<E> cursor = root;
+//      BTNode<E> parentCursor = null;
+//
+//      if (root == null || root.getRight() == null && root.getLeft() == null && root.getData() != target) {
+//         return false;
+//      }
+//
+//      // query for target cursor and parent cursor of target cursor
+//      while (!targetFound) {
+//         // move to the appropriate node if cursor does not equal target num
+//         if (cursor.getData() != target) {
+//            // check if we are going left or right
+//            if (target.compareTo(cursor.getData())) {
+//               // if left node is not null then move cursors and continue query
+//               // otherwise break because we've reached the end and the target num DNE
+//               if (cursor.getLeft() != null) {
+//                  parentCursor = cursor;
+//                  cursor = cursor.getLeft();
+//               } else {
+//                  break;
+//               }
+//            } else {
+//               if (cursor.getRight() != null) {
+//                  parentCursor = cursor;
+//                  cursor = cursor.getRight();
+//               } else {
+//                  break;
+//               }
+//            }
+//         } else {
+//            targetFound = true;
+//         }
+//      }
+//      // Student will replace this return statement with their own code:
+//      return target;
+//   }
 
    
    /**
