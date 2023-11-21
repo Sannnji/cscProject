@@ -113,7 +113,7 @@ public class Golfer implements Comparable<Golfer> {
      * Mutator to add the score for a single round of golf
      * @param score
      * the Golfers final score after a single round of golf
-     * @postcondition
+     * @Postcondition
      * the inputted score is added to the Golfers calculated average,
      * and the number of rounds that the Golfer has played is increased by one
      *
