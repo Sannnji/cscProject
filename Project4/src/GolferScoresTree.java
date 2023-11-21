@@ -1,9 +1,13 @@
+//Authors: James Ji, Samuel Acquaviva
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GolferScoresTree {
     public static void main(String[] args) throws FileNotFoundException {
+        //Flag boolean for main program loop
         boolean isRunning = true;
+        //Initializing scanner for user input
         Scanner usrInput = new Scanner(System.in);
 
         //  ******************* this needs to be changed and modified in jgrasp *******************
@@ -13,6 +17,9 @@ public class GolferScoresTree {
 
         golferTreeBag.display();
 
+        //Main program loop:
+        //Displays a menu and allows user to continuously make changes to the read-in Golfer objects
+        //until they are done, at which point they can quit and their changes will be saved to the text file
         while (isRunning) {
 
             System.out.println("\n\n******************** Main Menu ******************** ");
@@ -27,6 +34,7 @@ public class GolferScoresTree {
             System.out.print("\nPlease enter your selection: ");
             int usrChoice = getValidInput(usrInput);
 
+            //Switch statement given the users input
             switch (usrChoice) {
                 case 1:
                     golferTreeBag.display();
@@ -55,21 +63,37 @@ public class GolferScoresTree {
 
     }
 
+    //Input validation method:
+    //This will loop until a valid menu option is selected
     public static int getValidInput(Scanner usrInput) {
-        int usrChoice = 0;
+        int input = 0;
+        boolean flag = true;
+        while(flag){
+            System.out.print("\n>");
+            try{
+                input = usrInput.nextInt();
 
-        try {
-            usrChoice = usrInput.nextInt();
-            if (usrChoice > 7 || usrChoice < 1)
-                throw new Exception("Please enter a valid option.");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            usrInput.next();
+                if(input >=  1 && input <= 7){
+                    flag = false;
+                }
+                else{
+                    throw new Exception("Invalid input value: Please select a valid option (" + 1 + "-" + 7 + ")");
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.print("Invalid input type: Please enter a valid integer (" + 1 + "-" + 7 + ")");
+                usrInput.nextLine();
+            }
+            catch(Exception e){
+                System.out.print(e.getMessage());
+            }
         }
-
-        return usrChoice;
+        return input;
     }
 
+    //Database creation method:
+    //This reads in all the information from the text file at startup,
+    //creating a new Golfer object for each golfer in the text file
     public static TreeBag<Golfer> createDatabase(File data) throws FileNotFoundException {
         TreeBag golferTreeBag = new TreeBag();
 

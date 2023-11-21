@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1c7fa82-8772-44f9-ac7e-47d360d3a2f8" name="Changes" comment="Started working">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectTwo/src/LargeNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectTwo/src/LargeNumberTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/Project4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/Project4.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/out/production/Project4/BTNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/out/production/Project4/BTNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/out/production/Project4/Golfer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/out/production/Project4/Golfer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/out/production/Project4/GolferScoresTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/out/production/Project4/GolferScoresTree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/out/production/Project4/TreeBag.class" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/out/production/Project4/TreeBag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/src/Golfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/src/Golfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project4/src/GolferScoresTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project4/src/GolferScoresTree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +33,7 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2WJakR89PLIVCANRo8v2FbVQOzs" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -36,8 +45,12 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/dizzy/Documents/School/yr 3 semsester 1/csc103 - Data Structures/cscProject/ProjectTwo/src"
+    "last_opened_file_path": "C:/Users/dizzy/Documents/School/yr 3 semsester 1/csc103/cscProject/Project4",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
