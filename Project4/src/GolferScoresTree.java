@@ -73,9 +73,9 @@ public class GolferScoresTree {
     public static TreeBag<Golfer> createDatabase(File data) throws FileNotFoundException {
         TreeBag golferTreeBag = new TreeBag();
 
-        Scanner GOLF_DB = new Scanner(data);
-        while (GOLF_DB.hasNextLine()) {
-            String[] golferData = GOLF_DB.nextLine().split(" ");
+        Scanner GOLF_DATA_FILE = new Scanner(data);
+        while (GOLF_DATA_FILE.hasNextLine()) {
+            String[] golferData = GOLF_DATA_FILE.nextLine().split(" ");
             String lastName = golferData[0];
             int numOfRounds = Integer.parseInt(golferData[1]);
             double avgScore = Double.parseDouble(golferData[2]);
@@ -83,7 +83,7 @@ public class GolferScoresTree {
             Golfer golfer = new Golfer(lastName, numOfRounds, avgScore);
             golferTreeBag.add(golfer);
         }
-        GOLF_DB.close();
+        GOLF_DATA_FILE.close();
 
         return golferTreeBag;
     }
