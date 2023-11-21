@@ -32,8 +32,6 @@ public class TreeBag<E extends Comparable> implements Cloneable
    //   2. The instance variable root is a reference to the root of the
    //      binary search tree (or null for an empty tree).
    private BTNode<E> root;
-   public BTNode<E> cursor;
-
 
    /**
    * Insert a new element into this bag.
@@ -47,15 +45,14 @@ public class TreeBag<E extends Comparable> implements Cloneable
    public void add(E element) {
       BTNode<E> cursor = root;
       boolean nodeAdded = false;
-      BTNode<E> newNode = new BTNode(element, null, null);
+      BTNode<E> newNode = new BTNode<E>(element, null, null);
 
       // Handle null root (empty tree) case
       if (root == null){
          root = newNode;
       } else {
          while (!nodeAdded){
-            if (element.compareTo(cursor.getData()) <= 0){
-               System.out.println(element.compareTo(cursor.getData()));
+            if (element.compareTo(cursor.getData()) < 0){
                if (cursor.getLeft() == null) {
                   cursor.setLeft(newNode);
                   nodeAdded = true;
@@ -91,44 +88,37 @@ public class TreeBag<E extends Comparable> implements Cloneable
    *   the method returns null.
    *   The bag remains unchanged.
    **/
-//   public E retrieve(E target) {
-//      boolean targetFound = false;
-//      BTNode<E> cursor = root;
-//      BTNode<E> parentCursor = null;
-//
-//      if (root == null || root.getRight() == null && root.getLeft() == null && root.getData() != target) {
-//         return false;
-//      }
-//
-//      // query for target cursor and parent cursor of target cursor
-//      while (!targetFound) {
-//         // move to the appropriate node if cursor does not equal target num
-//         if (cursor.getData() != target) {
-//            // check if we are going left or right
-//            if (target.compareTo(cursor.getData())) {
-//               // if left node is not null then move cursors and continue query
-//               // otherwise break because we've reached the end and the target num DNE
-//               if (cursor.getLeft() != null) {
-//                  parentCursor = cursor;
-//                  cursor = cursor.getLeft();
-//               } else {
-//                  break;
-//               }
-//            } else {
-//               if (cursor.getRight() != null) {
-//                  parentCursor = cursor;
-//                  cursor = cursor.getRight();
-//               } else {
-//                  break;
-//               }
-//            }
-//         } else {
-//            targetFound = true;
-//         }
-//      }
-//      // Student will replace this return statement with their own code:
-//      return target;
-//   }
+   public E retrieve(E target) {
+      boolean targetFound = false;
+      BTNode<E> cursor = root;
+
+      // query for target cursor and parent cursor of target cursor
+      while (!targetFound) {
+         // move to the appropriate node if cursor does not equal target num
+         if (target.compareTo(cursor.getData()) != 0) {
+            // check if we are going left or right
+            if (target.compareTo(cursor.getData()) < 0) {
+               // if left node is not null then move cursors and continue query
+               // otherwise break because we've reached the end and the target num DNE
+               if (cursor.getLeft() != null) {
+                  cursor = cursor.getLeft();
+               } else {
+                  break;
+               }
+            } else {
+               if (cursor.getRight() != null) {
+                  cursor = cursor.getRight();
+               } else {
+                  break;
+               }
+            }
+         } else {
+            targetFound = true;
+         }
+      }
+
+      return targetFound ? cursor.getData() : null;
+   }
 
    
    /**
@@ -140,10 +130,78 @@ public class TreeBag<E extends Comparable> implements Cloneable
    *   <CODE>target</CODE> has been removed and the method returns true. 
    *   Otherwise the bag remains unchanged and the method returns false. 
    **/
-   public boolean remove(E target)
-   {
-      // Student will replace this return statement with their own code:
+   public boolean remove(E target) {
+      Object[] cursorArray = retrieveForRemoval(target);
+      BTNode<E> cursor = (BTNode<E>) cursorArray[1];
+      BTNode<E> parentOfCursor = (BTNode<E>) cursorArray[0];
+
+      // if target was not found
+      if (cursor == null){
+         return false;
+      }
+      // if cursor is root and has no children
+      else if (cursor == root && cursor.getLeft() == null && cursor.getRight() == null){
+         root = null;
+      }
+      // if cursor is root and has a null left node
+      else if (cursor == root && cursor.getLeft() == null){
+         root = root.getRight();
+      }
+      // if cursor is root and has a null right node
+      else if (cursor == root && cursor.getRight()== null){
+         root = root.getLeft();
+      }
+      // if cursor has a left node but no right node
+      else if (cursor.getRight() == null){
+         if (cursor == parentOfCursor.getLeft()){
+            parentOfCursor.setLeft(cursor.getLeft());
+         }
+         else if (cursor == parentOfCursor.getRight()){
+            parentOfCursor.setRight(cursor.getLeft());
+         }
+      }
+      // if cursor has a right node but no left node
+      else if (cursor.getLeft() == null){
+         if (cursor == parentOfCursor.getLeft()){
+            parentOfCursor.setLeft(cursor.getRight());
+         }
+         else if (cursor == parentOfCursor.getRight()){
+            parentOfCursor.setRight(cursor.getRight());
+         }
+      }
+      // if the cursor has left and right children
+      else {
+         cursor.setData(cursor.getLeft().getRightmostData());
+         cursor.setLeft(cursor.getLeft().removeRightmost());
+      }
+
       return false;
+   }
+
+   private Object[] retrieveForRemoval(E target) {
+      BTNode<E> cursor = root;
+      BTNode<E> parentOfCursor = null;
+      boolean done = false;
+      Object[] btArray = new Object[2];
+
+      while (cursor != null && !done){
+         if (target.compareTo(cursor.getData()) == 0){
+            done = true;
+         }
+         else if (target.compareTo(cursor.getData()) < 0){
+            parentOfCursor = cursor;
+            cursor = cursor.getLeft();
+         }
+         else if (target.compareTo(cursor.getData()) > 0){
+            parentOfCursor = cursor;
+            cursor = cursor.getRight();
+         }
+      }
+
+      btArray[1] = cursor;
+      btArray[0] = parentOfCursor;
+      return btArray;
+
    }
    
    /**
@@ -156,10 +214,10 @@ public class TreeBag<E extends Comparable> implements Cloneable
    *   Outputs all elements in the tree to Screen.
    *   Does not change the structure 
    **/
-   public void display()
-   {
-      // Student will replace this with their own code:
-      
+   public void display() {
+      if (root == null)
+         System.out.println("The database is empty. Nothing to print.");
+      root.inorderPrint();
    } 
      
    /**
@@ -218,13 +276,9 @@ public class TreeBag<E extends Comparable> implements Cloneable
    * @return
    *   the number of elements in this bag
    **/                           
-   public int size( )
-   {
+   public int size() {
       return BTNode.treeSize(root);
    }
-
-
-
 
    /**
    * Add the contents of another bag to this bag.

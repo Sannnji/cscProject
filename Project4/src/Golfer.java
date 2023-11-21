@@ -16,7 +16,12 @@ public class Golfer implements Comparable<Golfer> {
     }
 
     void setNumOfRounds(int numOfRounds) {
-        this.numOfRounds = numOfRounds;
+        if (numOfRounds > -1){
+            this.numOfRounds = numOfRounds;
+        }
+        else {
+            throw new IllegalArgumentException("The number of rounds must be 0 or greater!");
+        }
     }
 
     double getAvgScore() {
@@ -24,7 +29,12 @@ public class Golfer implements Comparable<Golfer> {
     }
 
     void setAvgScore(double avgScore) {
-        this.avgScore = avgScore;
+        if (avgScore > -1){
+            this.avgScore = avgScore;
+        }
+        else {
+            throw new IllegalArgumentException("The average score must be 0 or greater!");
+        }
     }
 
     Golfer(String lastName) {
@@ -49,7 +59,7 @@ public class Golfer implements Comparable<Golfer> {
     }
 
     @Override
-    public int compareTo(Golfer o) {
-        return 0;
+    public int compareTo(Golfer inputGolfer) {
+        return lastName.compareTo(inputGolfer.getLastName());
     }
 }
