@@ -1,4 +1,12 @@
-//Authors: James Ji, Samuel Acquaviva
+/******************************************************************************
+ *
+ * This class creates a binary tree database populated by data from a file with
+ * binary tree golfer nodes and allows users to modify, display, rewrite, and save data.
+ *
+ * @author James Ji, Samuel Acquaviva
+ *
+ ******************************************************************************/
+
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,19 +18,14 @@ public class GolferScoresTree {
         //Initializing scanner for user input
         Scanner usrInput = new Scanner(System.in);
 
-        //  ******************* this needs to be changed and modified in jgrasp *******************
-        File data = new File("./src/golferinfo.txt");
+        File data = new File("golferinfo.txt");
         TreeBag<Golfer> golferTreeBag = createDatabase(data);
-        //  ***************************************************************************************
-
-        golferTreeBag.display();
 
         //Main program loop:
         //Displays a menu and allows user to continuously make changes to the read-in Golfer objects
         //until they are done, at which point they can quit and their changes will be saved to the text file
         while (isRunning) {
-
-            System.out.println("\n\n******************** Main Menu ******************** ");
+            System.out.println("\n******************** Main Menu ******************** ");
             System.out.println("1. Display all golfer’s stats ordered by last name");
             System.out.println("2. Find and display one individual golfer's stats");
             System.out.println("3. Update an individual golfer’s stats");
@@ -32,8 +35,8 @@ public class GolferScoresTree {
             System.out.println("7. Quit without updating the database");
 
             System.out.print("\nPlease enter your selection: ");
-            int usrChoice = getValidInput(usrInput, 1, 7);
-            usrInput.nextLine();
+            int usrChoice = getValidMenuInput(usrInput, 7);
+            System.out.println();
 
             //Switch statement given the users input
             switch (usrChoice) {
@@ -41,29 +44,48 @@ public class GolferScoresTree {
                     golferTreeBag.display();
                     break;
                 case 2:
-                    Golfer newGolfer = golferTreeBag.retrieve(new Golfer("Walker"));
-                    System.out.print(newGolfer);
+                    System.out.print("Please enter the last name of the golfer you want to query: ");
+                    String golferName = getValidStrInput(usrInput);
+                    System.out.println();
+                    Golfer response = golferTreeBag.retrieve(new Golfer(golferName));
+
+                    if (response != null)
+                        System.out.println(response);
+                    else
+                        System.out.println("Golfer was not found");
+
                     break;
                 case 3:
-                    String string_input;
-                    System.out.print("Please enter the last name of the golfer you wish to update" +
-                            "\n>");
-                    string_input = usrInput.nextLine();
+                    System.out.print("Please enter the last name of the golfer you wish to update: ");
+                    golferName = getValidStrInput(usrInput);
+                    System.out.println();
 
-                    Golfer golfer = golferTreeBag.retrieve(new Golfer(string_input));
-                    if(golfer == null){
-                        System.out.println("ERROR: Golfer not found");
-                        return;
-                    }else {
+                    Golfer golfer = golferTreeBag.retrieve(new Golfer(golferName));
+                    if (golfer == null) {
+                        System.out.println("Golfer was not found");
+                    } else {
                         updateGolfer(usrInput, golfer);
                     }
                     break;
                 case 4:
-                    golferTreeBag.remove(new Golfer("Walker"));
-                    golferTreeBag.display();
+                    System.out.print("Please enter the last name of the golfer you want to delete: ");
+                    golferName = getValidStrInput(usrInput);
+                    System.out.println();
+
+                    if (golferTreeBag.remove(new Golfer(golferName)))
+                        System.out.println("Delete successful\n");
+                    else
+                        System.out.println("Delete unsuccessful, golfer was not found\n");
                     break;
                 case 5:
-                    golferTreeBag.add(new Golfer("Gilmore", 9, 90));
+                    System.out.println("Please enter the following information for the new golfer...");
+                    System.out.print("Last Name: ");
+                    golferName = getValidStrInput(usrInput);
+                    System.out.print("Number of rounds: ");
+                    int golferNumOfRounds = getValidStatsInput(usrInput);
+                    System.out.print("Average Score: ");
+                    int golferAvgScore = getValidStatsInput(usrInput);
+                    golferTreeBag.add(new Golfer(golferName, golferNumOfRounds, golferAvgScore));
                     golferTreeBag.display();
                     break;
                 case 6:
@@ -81,36 +103,36 @@ public class GolferScoresTree {
     }
 
     //Method to update a selected golfers stats
-    public static void updateGolfer(Scanner usrInput, Golfer golfer){
-        String string_input;
-        int int_input;
+    public static void updateGolfer(Scanner usrInput, Golfer golfer) {
+        int menuSelection;
         //Gives the user a menu to choose from, gets input and then
         //gets a value to perform an operation on the Golfer object
-        System.out.println("What would you like to do?" +
+        System.out.println("What would you like to update?" +
                 "\n1: Add a score" +
                 "\n2: Update the average score" +
                 "\n3: Update the number of rounds played");
 
-        int_input = getValidInput(usrInput, 1, 3);
+        System.out.print("\nPlease enter your selection: ");
+        menuSelection = getValidMenuInput(usrInput, 3);
 
         //Switch given user input
-        switch(int_input){
+        switch (menuSelection) {
             case 1:
-                System.out.println("Enter the score to add");
-                int_input = getValidInput(usrInput, 0, 256);
-                golfer.addScore(int_input);
+                System.out.print("\nEnter the score to add: ");
+                int statNum = getValidStatsInput(usrInput);
+                golfer.addScore(statNum);
                 System.out.println("Score added");
                 break;
             case 2:
-                System.out.println("Enter the new average score");
-                int_input = getValidInput(usrInput, 0, 256);
-                golfer.setAvgScore(int_input);
+                System.out.println("\nEnter the new average score: ");
+                statNum = getValidStatsInput(usrInput);
+                golfer.setAvgScore(statNum);
                 System.out.println("Average score updated");
                 break;
             case 3:
-                System.out.println("Enter the new number of rounds played");
-                int_input = getValidInput(usrInput, 0, 256);
-                golfer.setAvgScore(int_input);
+                System.out.println("\nEnter the new number of rounds played: ");
+                statNum = getValidStatsInput(usrInput);
+                golfer.setAvgScore(statNum);
                 System.out.println("Number of rounds updated");
                 break;
         }
@@ -131,33 +153,86 @@ public class GolferScoresTree {
         System.setOut(fileOutput);
     }
 
-    //Input validation method:
-    //This will loop until a valid menu option is selected
-    public static int getValidInput(Scanner usrInput, int min, int max) {
-        int input = 0;
-        boolean flag = true;
+    // integer input validation method for menus:
+    // this will loop until a valid integer is entered by the user
+    // the max param the set the highest number
+    // example: max = 9 then the valid inputs are [1,9]
+    public static int getValidMenuInput(Scanner usrInput, int max) {
+        int response = 0;
+        boolean validInput = false;
 
-        while(flag){
-            System.out.print("\n>");
-            try{
-                input = usrInput.nextInt();
+        while (!validInput) {
+            try {
+                response = usrInput.nextInt();
+                if (response < 1 || response > max)
+                    throw new Exception(response + " is not an valid menu option, try again: ");
 
-                if(input >=  min && input <= max){
-                    flag = false;
-                }
-                else{
-                    throw new Exception("Invalid input value: Please select a valid option (" + min + "-" + max + ")");
-                }
-            }
-            catch(InputMismatchException e){
-                System.out.print("Invalid input type: Please enter a valid integer (" + min + "-" + max + ")");
+                validInput = true;
+                usrInput.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.print("Input must be a integer, try again: ");
+                usrInput.nextLine();
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
                 usrInput.nextLine();
             }
-            catch(Exception e){
+        }
+
+        return response;
+    }
+
+    // integer input validation method for golfer stats:
+    // this will loop until a valid integer is entered by the user
+    // all golfer stats must be positive numbers
+    public static int getValidStatsInput(Scanner usrInput) {
+        int response = 0;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                response = usrInput.nextInt();
+                if (response < 0)
+                    throw new Exception("Please enter a valid option. Round and average score cannot be less than 0");
+
+                validInput = true;
+                usrInput.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be a integer, try again: ");
+                usrInput.nextLine();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                usrInput.nextLine();
+            }
+        }
+
+        return response;
+    }
+
+    // string input validation method:
+    // makes sure all strings contain only letters
+    public static String getValidStrInput(Scanner usrInput) {
+        String response = "";
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                response = usrInput.nextLine();
+
+                // make sure string only contains letters
+                if (!response.matches("^[a-zA-Z]+$")) {
+                    throw new Exception("Input must contain only letters, try again: ");
+                }
+
+                // capitalize first letter in string
+                response = response.substring(0, 1).toUpperCase() + response.substring(1);
+
+                validInput = true;
+            } catch (Exception e) {
                 System.out.print(e.getMessage());
             }
         }
-        return input;
+
+        return response;
     }
 
     //Database creation method:

@@ -6,7 +6,7 @@ Nickels 1 84.0
 Norman 12 76.4
 Palmer 7 77.77
 Rubble 5 91.25
+Sam 4 20.0
 Smith 2 81.5
 Stevens 8 81.59
 Walker 5 84.88
-Woods 10 80.75

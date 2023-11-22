@@ -1,3 +1,4 @@
+// James Ji, Samuel Acquaviva
 // File: BTNode.java
 // Complete documentation is available from the BTNode link in:
 //   http://www.cs.colorado.edu/~main/docs/
