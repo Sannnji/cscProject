@@ -230,5 +230,27 @@ public class TreeBag<E extends Comparable> implements Cloneable
    public int size() {
       return BTNode.treeSize(root);
    }
+
+   public int countOccurrences(E target)
+   {
+      int count = 0;
+
+      if (root != null){
+         BTNode<E> cursor = root;
+
+         while (cursor != null){
+            if (target.equals(cursor.getData())){
+               count++;
+            }
+            if (target.compareTo(cursor.getData()) <= 0){
+               cursor = cursor.getLeft();
+            }
+            else {
+               cursor = cursor.getRight();
+            }
+         }
+      }
+      return count;
+   }
 }
            
