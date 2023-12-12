@@ -1,30 +1,11 @@
 /******************************************************************************
+ * A <CODE>TableDoubleHash</CODE> is an double hashing table with a fixed capacity.
  *
- * Modified By James Ji, Samuel Acquaviva
+ * @author James Ji, Samuel Acquaviva
  *
  ******************************************************************************/
 
-// File: Table.java
-// Complete documentation is available from the Table link in:
-//   http://www.cs.colorado.edu/~main/docs
-
-/******************************************************************************
- * A <CODE>Table</CODE> is an open-address hash table with a fixed capacity.
- * The purpose is to show students how an open-address hash table is
- * implemented. Programs should generally use java.util.Hashtable
- * rather than this hash table.
- *
- * <dt><b>Java Source Code for this class:</b><dd>
- *   <A HREF="../../../../edu/colorado/collections/Table.java">
- *   http://www.cs.colorado.edu/~main/edu/colorado/collections/Table.java
- *   </A>
- *
- * @author Michael Main
- *   <A HREF="mailto:main@colorado.edu"> (main@colorado.edu) </A>
- *
- ******************************************************************************/
-public class Table< K , E >
-{
+public class TableDoubleHash<K, E> {
     // Invariant of the Table class:
     //   1. The number of items in the table is in the instance variable manyItems.
     //   2. The preferred location for an element with a given key is at index
@@ -43,6 +24,11 @@ public class Table< K , E >
     private boolean[ ] hasBeenUsed;
     private int collisionCount;
 
+    //returns number of collisions per additional entry into table
+    public int getCollisionCount() {
+        return collisionCount;
+    }
+
     /**
      * Initialize an empty table with a specified capacity.
      * @param <CODE>capacity</CODE>
@@ -52,8 +38,7 @@ public class Table< K , E >
      * @exception OutOfMemoryError
      *   Indicates insufficient memory for the specified capacity.
      **/
-    public Table(int capacity)
-    {
+    public TableDoubleHash(int capacity) {
         // The manyItems instance variable is automatically set to zero.
         // which is the correct initial value. The three arrays are allocated to
         // be the specified capacity. The boolean array is automatically
@@ -65,46 +50,6 @@ public class Table< K , E >
         data = new Object[capacity];
         hasBeenUsed = new boolean[capacity];
     }
-
-
-    /**
-     * Determines whether a specified key is in this table.
-     * @param <CODE>key</CODE>
-     *   the non-null key to look for
-     * <dt><b>Precondition:</b><dd>
-     *   <CODE>key</CODE> cannot be null.
-     * @return
-     *   <CODE>true</CODE? (if this table contains an object with the specified
-     *   key); <CODE>false</CODE> otherwise. Note that <CODE>key.equals( )</CODE>
-     *   is used to compare the <CODE>key</CODE> to the keys that are in the
-     *   table.
-     * @exception NullPointerException
-     *   Indicates that <CODE>key</CODE> is null.
-     **/
-    public boolean containsKey(K key)
-    {
-        return findIndex(key) != -1;
-    }
-
-
-    private int findIndex(K key)
-    // Postcondition: If the specified key is found in the table, then the return
-    // value is the index of the specified key. Otherwise, the return value is -1.
-    {
-        int count = 0;
-        int i = hash(key);
-
-        while (count < data.length && hasBeenUsed[i])
-        {
-            if (key.equals(keys[i]))
-                return i;
-            count++;
-            i = nextIndex(i);
-        }
-
-        return -1;
-    }
-
 
     /** Retrieves an object for a specified key.
      * @param <CODE>key</CODE>
@@ -119,8 +64,7 @@ public class Table< K , E >
      * @exception NullPointerException
      *   Indicates that <CODE>key</CODE> is null.
      **/
-    public E get(K key)
-    {
+    public E get(K key) {
         int index = findIndex(key);
 
         if (index == -1)
@@ -128,27 +72,6 @@ public class Table< K , E >
         else
             return (E) data[index];
     }
-
-
-    private int hash(Object key)
-    // The return value is a valid index of the table�s arrays. The index is
-    // calculated as the remainder when the absolute value of the key�s
-    // hash code is divided by the size of the table�s arrays.
-    {
-        return Math.abs(key.hashCode( )) % data.length;
-    }
-
-
-    private int nextIndex(int i)
-    // The return value is normally i+1. But if i+1 is data.length, then the
-    // return value is zero instead.
-    {
-        if (i+1 == data.length)
-            return 0;
-        else
-            return i+1;
-    }
-
 
     /**
      * Add a new element to this table, using the specified key.
@@ -172,7 +95,8 @@ public class Table< K , E >
      * @exception NullPointerException
      *   Indicates that <CODE>key</CODE> or <CODE>element</CODE> is null.
      **/
-    public E put(K key, E element) {
+    public E put(K key, E element)
+    {
         int index = findIndex(key);
         E answer;
         collisionCount = 0;
@@ -188,7 +112,7 @@ public class Table< K , E >
             index = hash(key);
             while (keys[index] != null) {
                 collisionCount++;
-                index = nextIndex(index);
+                index = nextIndex(index, key);
             }
             keys[index] = key;
             data[index] = element;
@@ -201,7 +125,6 @@ public class Table< K , E >
             throw new IllegalStateException("Table is full.");
         }
     }
-
 
     /**
      * Removes an object for a specified key.
@@ -219,8 +142,7 @@ public class Table< K , E >
      * @exception NullPointerException
      *   Indicates that </CODE>key</CODE> is null.
      **/
-    public E remove(K key)
-    {
+    public E remove(K key) {
         int index = findIndex(key);
         E answer = null;
 
@@ -235,10 +157,56 @@ public class Table< K , E >
         return answer;
     }
 
-    //returns number of collisions per additional entry into table
-    public int getCollisionCount() {
-        return collisionCount;
+    /**
+     * Determines whether a specified key is in this table.
+     * @param <CODE>key</CODE>
+     *   the non-null key to look for
+     * <dt><b>Precondition:</b><dd>
+     *   <CODE>key</CODE> cannot be null.
+     * @return
+     *   <CODE>true</CODE? (if this table contains an object with the specified
+     *   key); <CODE>false</CODE> otherwise. Note that <CODE>key.equals( )</CODE>
+     *   is used to compare the <CODE>key</CODE> to the keys that are in the
+     *   table.
+     * @exception NullPointerException
+     *   Indicates that <CODE>key</CODE> is null.
+     **/
+    public boolean containsKey(K key) {
+        return findIndex(key) != -1;
+    }
+
+    // Postcondition: If the specified key is found in the table, then the return
+    // value is the index of the specified key. Otherwise, the return value is -1.
+    private int findIndex(K key) {
+        int count = 0;
+        int i = hash(key);
+
+        while (count < data.length && hasBeenUsed[i])
+        {
+            if (key.equals(keys[i]))
+                return i;
+            count++;
+            i = nextIndex(i, key);
+        }
+
+        return -1;
+    }
+
+    // The return value is a valid index of the table�s arrays. The index is
+    // calculated as the remainder when the absolute value of the key�s
+    // hash code is divided by the size of the table�s arrays.
+    private int hash(Object key) {
+        return Math.abs(key.hashCode()) % data.length;
+    }
+
+    // Returns an index that indicates the number of spots to jump
+    private int doubleHash(Object key) {
+        return Math.abs(key.hashCode( )) % (data.length - 3);
+    }
+
+    // This returns the next index using the doubleHash function and some additional math
+    // Using modulo allows us to return the correct remainder
+    private int nextIndex(int i, K key) {
+        return (i + doubleHash(key)) % data.length;
     }
 }
-
-
