@@ -24,7 +24,11 @@ public class TableDoubleHash<K, E> {
     private boolean[ ] hasBeenUsed;
     private int collisionCount;
 
-    //returns number of collisions per additional entry into table
+    /**
+     * Gets the number of collisions per additional entry into table.
+     * @return
+     *  The number of collisions per additional entry into table.
+     **/
     public int getCollisionCount() {
         return collisionCount;
     }
@@ -175,8 +179,14 @@ public class TableDoubleHash<K, E> {
         return findIndex(key) != -1;
     }
 
-    // Postcondition: If the specified key is found in the table, then the return
-    // value is the index of the specified key. Otherwise, the return value is -1.
+    /**
+     * Finds the index of the given key within the array.
+     * @param <CODE>key</CODE>
+     *   the value of the key that is being searched for.
+     * @return
+     *   If the specified key is found in the table, then the return
+     *   value is the index of the specified key. Otherwise, the return value is -1.
+     **/
     private int findIndex(K key) {
         int count = 0;
         int i = hash(key);
@@ -192,9 +202,15 @@ public class TableDoubleHash<K, E> {
         return -1;
     }
 
-    // The return value is a valid index of the table�s arrays. The index is
-    // calculated as the remainder when the absolute value of the key�s
-    // hash code is divided by the size of the table�s arrays.
+    /**
+     * Gets the hashcode value of the key.
+     * @param <CODE>key</CODE>
+     *   the value of the key that is being converted into a hashcode value.
+     * @return
+     *  a valid index of the table's arrays. The index is
+     *  calculated as the remainder when the absolute value of the key's
+     *  hash code is divided by the size of the table's arrays.
+     **/
     private int hash(Object key) {
         return Math.abs(key.hashCode()) % data.length;
     }
@@ -204,8 +220,17 @@ public class TableDoubleHash<K, E> {
         return Math.abs(key.hashCode( )) % (data.length - 3);
     }
 
-    // This returns the next index using the doubleHash function and some additional math
-    // Using modulo allows us to return the correct remainder
+    /**
+     * Gets the index of the next value within the array
+     * using the doubleHash function.
+     * @param <CODE>i</CODE>
+     *   the current index in the array.
+     * @param <CODE>key</CODE>
+     *   the value of the key within the array.
+     * @return
+     *  The return value is the next index. Using modulo
+     *  allows us to return the correct remainder.
+     **/
     private int nextIndex(int i, K key) {
         return (i + doubleHash(key)) % data.length;
     }

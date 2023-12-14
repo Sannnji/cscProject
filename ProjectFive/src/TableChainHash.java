@@ -25,7 +25,11 @@ public class TableChainHash< K , E >
     private boolean[ ] hasBeenUsed;
     private int collisionCount;
 
-    //returns number of collisions per additional entry into table
+    /**
+     * Gets the number of collisions per additional entry into table.
+     * @return
+     *  The number of collisions per additional entry into table.
+     **/
     public int getCollisionCount() {
         return collisionCount;
     }
@@ -182,8 +186,14 @@ public class TableChainHash< K , E >
     }
 
 
-    // Postcondition: If the specified key is found in the table, then the return
-    // value is the index of the specified key. Otherwise, the return value is -1.
+    /**
+     * Finds the index of the given key within the array.
+     * @param <CODE>key</CODE>
+     *   the value of the key that is being searched for.
+     * @return
+     *   If the specified key is found in the table, then the return
+     *   value is the index of the specified key. Otherwise, the return value is -1.
+     **/
     private int findIndex(K key)
     {
         int count = 0;
@@ -200,17 +210,29 @@ public class TableChainHash< K , E >
         return -1;
     }
 
+    /**
+     * Gets the hashcode value of the key.
+     * @param <CODE>key</CODE>
+     *   the value of the key that is being converted into a hashcode value.
+     * @return
+     *  a valid index of the table's arrays. The index is
+     *  calculated as the remainder when the absolute value of the key's
+     *  hash code is divided by the size of the table's arrays.
+     **/
     private int hash(Object key)
-    // The return value is a valid index of the table�s arrays. The index is
-    // calculated as the remainder when the absolute value of the key�s
-    // hash code is divided by the size of the table�s arrays.
     {
         return Math.abs(key.hashCode( )) % data.length;
     }
 
+    /**
+     * Gets the index of the next value within the array.
+     * @param <CODE>i</CODE>
+     *   the current index in the array.
+     * @return
+     *  The return value is normally i+1. But if i+1 is data.length, then the
+     *  return value is zero instead.
+     **/
     private int nextIndex(int i)
-    // The return value is normally i+1. But if i+1 is data.length, then the
-    // return value is zero instead.
     {
         if (i+1 == data.length)
             return 0;
