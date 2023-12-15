@@ -215,7 +215,13 @@ public class TableDoubleHash<K, E> {
         return Math.abs(key.hashCode()) % data.length;
     }
 
-    // Returns an index that indicates the number of spots to jump
+    /**
+     * Gets an index that indicates the number of spots to jump.
+     * @param <CODE>key</CODE>
+     *   the value of the key that is being converted into a hashcode value.
+     * @return
+     *   the number of indexes to move
+     **/
     private int doubleHash(Object key) {
         return Math.abs(key.hashCode( )) % (data.length - 3);
     }

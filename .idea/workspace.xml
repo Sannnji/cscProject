@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1c7fa82-8772-44f9-ac7e-47d360d3a2f8" name="Changes" comment="Added Javadoc, comments, misc stuff. Reworked input val method.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="d1c7fa82-8772-44f9-ac7e-47d360d3a2f8" name="Changes" comment="Added Javadoc, comments, misc stuff.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectFive/src/HashTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectFive/src/HashTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectFive/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectFive/src/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectFive/src/TableChainHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectFive/src/TableChainHash.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectFive/src/TableDoubleHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectFive/src/TableDoubleHash.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +85,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700594257623</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Javadoc, comments, misc stuff.">
+      <option name="closed" value="true" />
+      <created>1702594380851</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702594380851</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,6 +111,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Started working" />
     <MESSAGE value="Added Javadoc, comments, misc stuff. Reworked input val method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Javadoc, comments, misc stuff. Reworked input val method." />
+    <MESSAGE value="Added Javadoc, comments, misc stuff." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Javadoc, comments, misc stuff." />
   </component>
 </project>
