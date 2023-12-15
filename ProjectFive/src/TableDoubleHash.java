@@ -1,5 +1,5 @@
 /******************************************************************************
- * A <CODE>TableDoubleHash</CODE> is an double hashing table with a fixed capacity.
+ * A <CODE>TableDoubleHash</CODE> is an double hashing table.
  *
  * @author James Ji, Samuel Acquaviva
  *

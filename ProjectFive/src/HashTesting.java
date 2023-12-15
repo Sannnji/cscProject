@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class HashTesting {
     public static void main(String[] args) throws FileNotFoundException {
         // Load file
-        File data = new File("src\\names.txt");
+        File data = new File("names.txt");
         Scanner file = new Scanner(data);
 
         // Declare instance variables

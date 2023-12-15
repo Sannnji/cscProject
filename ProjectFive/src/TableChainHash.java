@@ -1,5 +1,5 @@
 /******************************************************************************
- * A <CODE>TableChainHash</CODE> is an chain hashing table with a fixed capacity.
+ * A <CODE>TableChainHash</CODE> is an chain hashing table.
  *
  * @author James Ji, Samuel Acquaviva
  *
